@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: d9a560ba2abd99343899ea4c5efe7a29
-timeCreated: 1478566952
+timeCreated: 1478629402
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -23,12 +23,6 @@ ModelImporter:
     100030: transform4
     100032: transform5
     100034: transform6
-    100036: polySurface1 1
-    100038: transform10
-    100040: transform11
-    100042: transform7
-    100044: transform8
-    100046: transform9
     400000: pCube1
     400002: pCube3
     400004: pCube5
@@ -47,30 +41,21 @@ ModelImporter:
     400030: transform4
     400032: transform5
     400034: transform6
-    400036: polySurface1 1
-    400038: transform10
-    400040: transform11
-    400042: transform7
-    400044: transform8
-    400046: transform9
     2300000: polySurface1
     2300002: polySurface2
     2300004: polySurface3
     2300006: polySurface4
     2300008: polySurface5
-    2300010: pCube5
     3300000: polySurface1
     3300002: polySurface2
     3300004: polySurface3
     3300006: polySurface4
     3300008: polySurface5
-    3300010: pCube5
     4300000: polySurface1
     4300002: polySurface2
     4300004: polySurface3
     4300006: polySurface4
     4300008: polySurface5
-    4300010: pCube5
     9500000: //RootNode
   materials:
     importMaterials: 1
