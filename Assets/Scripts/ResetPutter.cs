@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class ResetPutter : MonoBehaviour
@@ -7,19 +8,21 @@ public class ResetPutter : MonoBehaviour
     public GameObject putter, ballObject, camera;
     private GameObject hole;
     private Rigidbody rb;
-    int holeNumber = 5;
+    int holeNumber = 0;
     private Vector3 cameraOffset, prevPos;
     bool needReset = true, inTheHole = false;
     float[] holeLocation = new float[] { 0, -23, -86, -147, -172, -186 };
+	PlayerController pc;
 
     // Use this for initialization
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+		pc = putter.GetComponent<PlayerController>();
         NewHole();
         prevPos = transform.position;
-        Physics.IgnoreLayerCollision(8, 10, true);
-}
+		Physics.IgnoreLayerCollision(8, 10, true);
+	}
 
     // Update is called once per frame
     void Update()
@@ -32,11 +35,19 @@ public class ResetPutter : MonoBehaviour
         else if (rb.IsSleeping() && needReset)
         {
             putter.SetActive(true);
-            if (inTheHole)
-            {
-                inTheHole = false;
-                NewHole();
-            }
+			if (inTheHole) 
+			{
+				inTheHole = false;
+				pc.scoreboard.SetActive(true);
+				GameObject.Find("txtScore" + holeNumber).GetComponent<Text> ().text = pc.strokes.ToString();
+				NewHole();
+			}
+			else if (pc.strokes == 10)
+			{
+				pc.scoreboard.SetActive(true);
+				GameObject.Find("txtScore" + holeNumber).GetComponent<Text> ().text = 10.ToString();
+				NewHole();
+			}
             NewShot();
         }
         prevPos = transform.position;
@@ -52,10 +63,12 @@ public class ResetPutter : MonoBehaviour
 
     public void NewHole()
     {
+		pc.scoreboard.SetActive(false);
         transform.localPosition = new Vector3(0.0f, 0.5f, 0.0f);
         ballObject.transform.position = new Vector3(holeLocation[holeNumber], 0f, -44.5f);
         holeNumber++;
         hole = GameObject.Find("hole" + holeNumber);
+		pc.strokes = 0;
     }
     
     public void NewShot()
@@ -77,6 +90,6 @@ public class ResetPutter : MonoBehaviour
         camera.transform.LookAt(ballObject.transform);
         camera.transform.Rotate(-19.378f, 0f, 0f);
         cameraOffset = camera.transform.position - transform.position;
-        putter.GetComponent<PlayerController>().SetClamps(xDistance, zDistance);
+        pc.SetClamps(xDistance, zDistance);
     }
 }

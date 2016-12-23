@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
     GUI score;
     float power = 0;
     GUIStyle guiStyle;
-    int strokes = 0;
-    public GameObject golfball;
+    public int strokes;
+    public GameObject golfball, scoreboard;
 
     void Start()
     {
@@ -28,6 +28,46 @@ public class PlayerController : MonoBehaviour
         GUI.Label(new Rect(0, Screen.height - 30, 100, 30), "Power: " + power.ToString("0.00"), guiStyle);
         GUI.Label(new Rect(0, Screen.height - 60, 100, 30), "Strokes: " + strokes, guiStyle);
     }
+
+	void Update()
+	{
+		if (Input.GetKeyDown("space") && !newMax)
+		{
+			newMax = true;
+			float x, z;
+
+			if (reversedX)
+			{
+				x = -(minX - transform.position.x) * xDistance;
+				minX += x;
+			}
+			else
+			{
+				x = (maxX - transform.position.x) * xDistance;
+				maxX += x;
+			}
+
+			if (reversedZ)
+			{
+				z = -(minZ - transform.position.z) * zDistance;
+				minZ += z;
+			}
+			else
+			{
+				z = (maxZ - transform.position.z) * zDistance;
+				maxZ += z;
+			}
+
+			Vector3 movement = new Vector3(x, 0.0f, z);
+
+			rb.AddForce(movement * 1500);
+			strokes++;
+		}
+		else if(Input.GetKeyDown(KeyCode.Tab))
+			scoreboard.SetActive(true);
+		else if(Input.GetKeyUp(KeyCode.Tab))
+			scoreboard.SetActive(false);
+	}
 
     void FixedUpdate()
     {
@@ -103,39 +143,6 @@ public class PlayerController : MonoBehaviour
                     gameObject.SetActive(false);
             }
             transform.position = new Vector3(transform.position.x, transform.position.y, minZ);
-        }
-
-        if (Input.GetKeyDown("space") && !newMax)
-        {
-            newMax = true;
-            float x, z;
-
-            if (reversedX)
-            {
-                x = -(minX - transform.position.x) * xDistance;
-                minX += x;
-            }
-            else
-            {
-                x = (maxX - transform.position.x) * xDistance;
-                maxX += x;
-            }
-
-            if (reversedZ)
-            {
-                z = -(minZ - transform.position.z) * zDistance;
-                minZ += z;
-            }
-            else
-            {
-                z = (maxZ - transform.position.z) * zDistance;
-                maxZ += z;
-            }
-
-            Vector3 movement = new Vector3(x, 0.0f, z);
-            
-            rb.AddForce(movement * 1500);
-            strokes++;
         }
     }
 
