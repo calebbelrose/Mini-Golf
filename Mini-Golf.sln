@@ -1,7 +1,7 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{DECA6844-F348-9571-D29C-2ABC8498DF35}") = "Mini-Golf", "Assembly-CSharp.csproj", "{738E8CE1-4E26-C206-688E-E2FFE7479C4D}"
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mini-Golf", "Assembly-CSharp.csproj", "{738E8CE1-4E26-C206-688E-E2FFE7479C4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

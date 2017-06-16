@@ -5,13 +5,13 @@ using System.Collections;
 public class ResetPutter : MonoBehaviour
 {
 
-    public GameObject putter, ballObject, camera;							// Putter, golf ball and camera objects
+    public GameObject putter, ballObject;									// Putter, golf ball and camera objects
     private GameObject hole;												// Hole object
     private Rigidbody rb;													// Rigid body for the golf ball
     int holeNumber = 0;														// The current hole number
     private Vector3 cameraOffset, prevPos;									// Offset for the camera and position of the ball before it was shot
     bool needReset = true, inTheHole = false;								// Whether the ball needs to be reset and whether it's in the hole
-    float[] holeLocation = new float[] { 0, -23, -86, -147, -172, -186 };	// Location of each hole
+	float[] holeLocation = new float[] { 0f, -23f, -86f, -147f, -172f, -186f, -239.5f, -262.5f };	// Location of each hole
 	PlayerController pc;													// Player controller
 
     // Use this for initialization
@@ -32,7 +32,7 @@ public class ResetPutter : MonoBehaviour
 		// Moves the camera if the ball is hit and determines that the ball needs to be reset
         if (transform.position != prevPos)
         {
-            camera.transform.position = transform.position + cameraOffset;
+            pc.cam.transform.position = transform.position + cameraOffset;
             needReset = true;
         }
 		// Resets the golf ball if it was shot and has stopped moving
@@ -91,12 +91,12 @@ public class ResetPutter : MonoBehaviour
         xDistance = numerator1 / denominator;
         zDistance = numerator2 / denominator;
         putter.transform.position = new Vector3(transform.position.x - 0.5f * xDistance, ballObject.transform.position.y, transform.position.z - 0.5f * zDistance);
-        camera.transform.position = new Vector3(transform.position.x - 35.5f * xDistance, ballObject.transform.position.y + 20f, transform.position.z - 35.5f * zDistance);
+        pc.cam.transform.position = new Vector3(transform.position.x - 35.5f * xDistance, ballObject.transform.position.y + 20f, transform.position.z - 35.5f * zDistance);
         putter.transform.LookAt(hole.transform);
         putter.transform.rotation = new Quaternion(0f, putter.transform.rotation.y, putter.transform.rotation.z, putter.transform.rotation.w);
-        camera.transform.LookAt(ballObject.transform);
-        camera.transform.Rotate(-19.378f, 0f, 0f);
-        cameraOffset = camera.transform.position - transform.position;
+        pc.cam.transform.LookAt(ballObject.transform);
+        pc.cam.transform.Rotate(-19.378f, 0f, 0f);
+        cameraOffset = pc.cam.transform.position - transform.position;
         pc.SetClamps(xDistance, zDistance);
 		pc.target = hole.transform.position;
     }

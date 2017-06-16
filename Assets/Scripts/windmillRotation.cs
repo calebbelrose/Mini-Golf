@@ -7,25 +7,6 @@ public class windmillRotation : MonoBehaviour
 	void Update ()
     {
 		// Rotates the windmill
-        transform.Rotate(0f, 0f, 0.05f);
-		transform.Rotate(0f, 0f, 0.05f);
-		transform.Rotate(0f, 0f, 0.05f);
-		transform.Rotate(0f, 0f, 0.05f);
-		transform.Rotate(0f, 0f, 0.05f);
-		transform.Rotate(0f, 0f, 0.05f);
-		transform.Rotate(0f, 0f, 0.05f);
-		transform.Rotate(0f, 0f, 0.05f);
-		transform.Rotate(0f, 0f, 0.05f);
-		transform.Rotate(0f, 0f, 0.05f);
-		transform.Rotate(0f, 0f, 0.05f);
-		transform.Rotate(0f, 0f, 0.05f);
-		transform.Rotate(0f, 0f, 0.05f);
-		transform.Rotate(0f, 0f, 0.05f);
-		transform.Rotate(0f, 0f, 0.05f);
-		transform.Rotate(0f, 0f, 0.05f);
-		transform.Rotate(0f, 0f, 0.05f);
-		transform.Rotate(0f, 0f, 0.05f);
-		transform.Rotate(0f, 0f, 0.05f);
-		transform.Rotate(0f, 0f, 0.05f);
+		transform.Rotate(0.0f, 0.0f, Mathf.LerpAngle(0.0f, 45.0f, Time.deltaTime));
     }
 }
